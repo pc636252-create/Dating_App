@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:dating_app/routes/app_routes.dart';
+import 'package:dating_app/shared_pref/Shared_Prefrence.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
@@ -13,13 +17,20 @@ import 'package:intl/intl.dart';
 
 class ProfileController extends GetxController {
   final formKey = GlobalKey<FormState>();
+  final SharedPrefService _prefService = Get.find<SharedPrefService>();
+  final RxString selectedImagePath = ''.obs;
 
   final firstNameController = TextEditingController(text: 'David');
   final lastNameController = TextEditingController(text: 'Peterson');
 
-  var selectedImagePath = ''.obs;
   var selectedDateStr = 'Choose birthday date'.obs;
   DateTime? selectedDateTime;
+
+  @override
+  void onInit() {
+    super.onInit();
+    loadSavedImage();
+  }
 
   Future<void> pickImage() async {
     final ImagePicker picker = ImagePicker();
@@ -27,7 +38,25 @@ class ProfileController extends GetxController {
 
     if (image != null) {
       selectedImagePath.value = image.path;
+
+      await _prefService.saveImagePath(image.path);
     }
+  }
+ /// Loading image
+  void loadSavedImage() {
+    final String savedPath = _prefService.getImagePath();
+
+    if (savedPath.isNotEmpty && File(savedPath).existsSync()) {
+      selectedImagePath.value = savedPath;
+    }
+  }
+
+  /// Remove saved image
+  Future<void> removeImage() async {
+    selectedImagePath.value = '';
+    await _prefService.remover(
+      SharedPrefService.keyProfileImage,
+    );
   }
 
   Future<void> handleConfirm() async {
@@ -210,6 +239,7 @@ class ProfileController extends GetxController {
        Get.toNamed(AppRoutes.interest);
     }
 }
+
 /// interest
   var selectedInterests = <String>[].obs;
 

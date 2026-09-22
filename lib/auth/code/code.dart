@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../utils/app_colors.dart';
 import '../authcontrollers/VerificationController.dart';
 
 class VerificationPage extends GetView<VerificationController>{
@@ -15,7 +16,7 @@ class VerificationPage extends GetView<VerificationController>{
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.red),
+          icon: Icon(Icons.arrow_back_ios, color: AppColors.primary),
           onPressed: () => Get.back(),
         ),
       ),

@@ -3,12 +3,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating_app/controllers/chat_controller.dart';
 import 'package:dating_app/routes/app_pages.dart';
 import 'package:dating_app/routes/app_routes.dart';
+import 'package:dating_app/shared_pref/Shared_Prefrence.dart';
 import 'package:dating_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Get.putAsync(()=> SharedPrefService().init());
   runApp( DatingApp());
 }
 // class MyApp extends StatelessWidget {

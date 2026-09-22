@@ -2,11 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../sign_up/sign_up.dart';
 import '../authcontrollers/loginController.dart';
 
 class LoginPage extends GetView<LoginController> {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,6 @@ class LoginPage extends GetView<LoginController> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-
               Padding(
                 padding: const EdgeInsets.only(top: 25),
                 child: SizedBox(

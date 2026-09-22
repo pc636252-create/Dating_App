@@ -19,7 +19,6 @@ class DiscoverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DiscoverController controller = Get.put(DiscoverController());
-
     return Column(
       children: [
         _buildHeader(),

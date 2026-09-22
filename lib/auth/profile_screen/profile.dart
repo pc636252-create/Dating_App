@@ -9,6 +9,12 @@ class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
+    Widget _placeholderImage() {
+      return Image.network(
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP0FSHeQfg68ULeeMl6AovEZZPs-ABnQOODylzHS74Lw&s=10",
+        fit: BoxFit.cover,
+      );
+    }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -53,25 +59,26 @@ class ProfileView extends GetView<ProfileController> {
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      Obx(() => Container(
-                        width: 120,
-                        height: 120,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(30),
-                          image: controller.selectedImagePath.value.isNotEmpty
-                              ? DecorationImage(
-                            image: FileImage(File(controller.selectedImagePath.value)),
+                      Obx(() {
+                        final path = controller.selectedImagePath.value;
+                        return Container(
+                          width: 120,
+                          height: 120,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: path.isNotEmpty
+                              ? Image.file(
+                            File(path),
                             fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                _placeholderImage(),
                           )
-                              : null,
-                        ),
-                        child: controller.selectedImagePath.value.isEmpty
-                            ? Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP0FSHeQfg68ULeeMl6AovEZZPs-ABnQOODylzHS74Lw&s=10",
-                          fit: BoxFit.cover,
-                        ) : null,
-                      )),
+                              : _placeholderImage(),
+                        );
+                      }),
                       GestureDetector(
                         onTap: controller.pickImage,
                         child: Container(

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:dating_app/auth/profile/profile.dart';
 import 'package:dating_app/routes/app_routes.dart';
 import 'package:get/get.dart';
 

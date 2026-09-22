@@ -1,7 +1,6 @@
 import 'package:dating_app/auth/authcontrollers/VerificationController.dart';
 import 'package:dating_app/auth/authcontrollers/profileController.dart';
 import 'package:dating_app/auth/login_page/login_page.dart';
-import 'package:dating_app/auth/profile/profile.dart';
 import 'package:dating_app/auth/sign_up/sign_up.dart';
 import 'package:get/get.dart';
 import '../auth/InterestsScreen/InterestsScreen.dart';
@@ -11,6 +10,7 @@ import '../auth/authcontrollers/loginController.dart';
 import '../auth/i_am/i_am.dart';
 import '../auth/notification/notification.dart';
 import '../auth/phone_number/phone_number.dart';
+import '../auth/profile_screen/profile.dart';
 import '../main.dart';
 import '../screens/profile/own_profile_screen.dart';
 import 'app_routes.dart';
